@@ -1,34 +1,50 @@
-// Selector
+// 1=> all id selected
+// 2=> form add Event listener
+// 3=> form addEventListener added handelForm
+// 2=> received input 
+
+// Selector 1 1️⃣
 const form = document.querySelector("form");
 const nameField = document.querySelector("#name");
 const nameMsgElm = document.querySelector("#nameMsg");
 const userNameField = document.querySelector("#userName");
 const emailField = document.querySelector("#email");
 const mobileNumberField = document.querySelector("#mobileNumber");
-const facebookLinkField = document.querySelector("#facebookLink");
+const websiteLinkField = document.querySelector("#websiteLink");
 const passwordField = document.querySelector("#password");
 const confirmPasswordField = document.querySelector("#confirmPassword");
 
-// showMessage
-function showMessage(msg, action=danger) {
-  const textMsg = `<small class='text-${action}>${msg}</small>`;
-  nameMsgElm.insertAdjacentHTML('afterbegin', textMsg);
-}
 
-// name input
-function nameInput() {
+
+// receive input 4️⃣
+function receiveInputs(){
   const name = nameField.value;
-  const rexName = /^[a-z]{3,10}\s[a-z]{3,10}$/i;
-  if (!rexName.test(name)) {
-    showMessage("Please insert a valid name.", 'danger');
-  } else {
-    showMessage(msg);
+  const userName = userNameField.value;
+  const email = emailField.value;
+  const mobileNumber = mobileNumberField.value;
+  const website = websiteLinkField.value;
+  const password = passwordField.value;
+  const confirmPassword = confirmPasswordField.value;
+  const allInputs = {
+    name,
+    userName,
+    email,
+    mobileNumber,
+    website,
+    password,
+    confirmPassword,
   }
+  return allInputs;
 }
 
+
+// form addEventListener 2️⃣
+form.addEventListener("submit", handelForm);
+
+// form addEventListener added handelForm 3️⃣
 function handelForm(e) {
   e.preventDefault();
-  nameInput();
+  receiveInputs()
 }
 
-form.addEventListener("submit", handelForm);
+
