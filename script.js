@@ -12,7 +12,9 @@ const userMsgElm = document.querySelector("#userMsg");
 const emailField = document.querySelector("#email");
 const emailMsgElm = document.querySelector('#emailMsg');
 const mobileNumberField = document.querySelector("#mobileNumber");
+const mobileNumberMsgElm = document.querySelector('#mobileNumberMsg')
 const websiteLinkField = document.querySelector("#websiteLink");
+const websiteMsgElm = document.querySelector('#websiteMsg');
 const passwordField = document.querySelector("#password");
 const confirmPasswordField = document.querySelector("#confirmPassword");
 let isValid = true;
@@ -22,6 +24,29 @@ let isValid = true;
 function showMessage(msg = "Something is wrong", color = 'red', target) {
   target.style.color = color;
   target.textContent = msg;
+}
+
+// website link validation 1️⃣1️⃣
+function validatedWebsiteLink(){
+  const websiteInput = websiteLinkField.value;
+  const regWebsiteLink = /(https:\/\/|http:\/\/|www\.)?[a-z]{3,20}\.?[a-z]{3,10}\.[a-z]{3,10}/gi;
+  if(!regWebsiteLink.test(websiteInput)){
+    showMessage('Please insert a valid website link in the specific format (https://ibrahim.com, www.ibrahim.com, ibrahim.com, http://ibrahim.gov.com)', 'red', websiteMsgElm);
+  }else{
+    showMessage('Ex: https://ibrahim.com, www.ibrahim.com, ibrahim.com ✔', 'green', websiteMsgElm)
+  }
+}
+
+// Mobile Number Validation 🔟
+function validateMobileNumber(){
+  const mobileNumberInput = mobileNumberField.value;
+  const regMobileNumber = /\+?(88)?0?\w{3}-?\w{3}-?\w{4}/g
+  if(!regMobileNumber.test(mobileNumberInput)){
+    showMessage('Please insert a valid bangladeshi phone number in the specific format (+8801222222222, 01222222222, 01222-222222)', 'red', mobileNumberMsgElm)
+    isValid = false;
+  }else{
+    showMessage('+8801744-442244 ✔', 'green', mobileNumberMsgElm);
+  }
 }
 
 // email validation 9️⃣
@@ -67,6 +92,8 @@ function validationInput(receivedData) {
   validatedName(name); //-> 6
   validatedUserName(userName); //-> 8
   validatedEmail(email); //-> 9
+  validateMobileNumber(mobileNumber); //-> 10
+  validatedWebsiteLink(website); //-> 11
 
   return isValid;
 }
@@ -101,5 +128,3 @@ function handelForm(e) {
 
 // form addEventListener 2️⃣
 form.addEventListener("submit", handelForm);
-
-
