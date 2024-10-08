@@ -16,7 +16,9 @@ const mobileNumberMsgElm = document.querySelector('#mobileNumberMsg')
 const websiteLinkField = document.querySelector("#websiteLink");
 const websiteMsgElm = document.querySelector('#websiteMsg');
 const passwordField = document.querySelector("#password");
+const passwordMsgElm = document.querySelector('#passwordMsg');
 const confirmPasswordField = document.querySelector("#confirmPassword");
+const showDataInUiElm = document.querySelector('#showDataInUi');
 let isValid = true;
 
 
@@ -26,12 +28,77 @@ function showMessage(msg = "Something is wrong", color = 'red', target) {
   target.textContent = msg;
 }
 
+// show Data ui 1️⃣4️⃣
+function showDataUi(showInput){
+  const { name, userName, email, mobileNumber, website} = showInput;
+  const table = `<h3 class="text-center text-success"><u>My profile</u></h3>
+  <table class="table table-bordered">
+  <tr>
+    <td>Name</td>
+    <td>${name}</td>
+  </tr>
+  <tr>
+    <td>User Name</td>
+    <td>${userName}</td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td>${email}</td>
+  </tr>
+  <tr>
+    <td>Phone Number</td>
+    <td>${mobileNumber}</td>
+  </tr>
+  <tr>
+    <td>Website Link</td>
+    <td>
+      <a href="${website}"
+        >${website}</a
+      >
+    </td>
+  </tr>
+  <tr>
+    <td>Password</td>
+    <td>**********</td>
+  </tr>
+</table>`;
+showDataInUiElm.insertAdjacentHTML('beforeend', table);
+}
+
+// reset input 1️⃣3️⃣
+function resetInput(){
+  nameField.value = '';
+  userNameField.value = '';
+  emailField.value = '';
+  mobileNumberField.value = '';
+  websiteLinkField.value = '';
+  passwordField.value = '';
+  confirmPasswordField.value = '';
+}
+
+// password validation 1️⃣2️⃣
+function validatePassword(password, confirmPassword){
+  const regPassword = /^(?=.*\d)(?=.*[!§$%&\/\?#\+\-_@\(\)\{\}\[\]\:\;\<\>\*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  if(!regPassword.test(password)){
+    showMessage('Please, insert a strong password more than 8 character', 'red', passwordMsgElm);
+    isValid = false
+  }
+  else if(password !== confirmPassword){
+    showMessage("Password didn't match", 'red', passwordMsgElm)
+    isValid = false
+  }
+  else{
+    showMessage('Ex: Letters-numbers-sign(More than 8 character) ✔', 'green', passwordMsgElm)
+  }
+}
+
 // website link validation 1️⃣1️⃣
-function validatedWebsiteLink(){
+function validateWebsiteLink(){
   const websiteInput = websiteLinkField.value;
-  const regWebsiteLink = /(https:\/\/|http:\/\/|www\.)?[a-z]{3,20}\.?[a-z]{3,10}\.[a-z]{3,10}/gi;
+  const regWebsiteLink = /(https:\/\/|http:\/\/|www\.)?[a-z]{3,20}\.?[a-z]{3,10}\.?[a-z]{3,10}/gi;
   if(!regWebsiteLink.test(websiteInput)){
     showMessage('Please insert a valid website link in the specific format (https://ibrahim.com, www.ibrahim.com, ibrahim.com, http://ibrahim.gov.com)', 'red', websiteMsgElm);
+    isValid = false;
   }else{
     showMessage('Ex: https://ibrahim.com, www.ibrahim.com, ibrahim.com ✔', 'green', websiteMsgElm)
   }
@@ -40,7 +107,7 @@ function validatedWebsiteLink(){
 // Mobile Number Validation 🔟
 function validateMobileNumber(){
   const mobileNumberInput = mobileNumberField.value;
-  const regMobileNumber = /\+?(88)?0?\w{3}-?\w{3}-?\w{4}/g
+  const regMobileNumber = /\+?(88)?01[3-9]\d{2}\-?\d{6}\b/;
   if(!regMobileNumber.test(mobileNumberInput)){
     showMessage('Please insert a valid bangladeshi phone number in the specific format (+8801222222222, 01222222222, 01222-222222)', 'red', mobileNumberMsgElm)
     isValid = false;
@@ -50,9 +117,9 @@ function validateMobileNumber(){
 }
 
 // email validation 9️⃣
-function validatedEmail(){
+function validateEmail(){
   const emailInput = emailField.value;
-  const regEmail = /^\w{3,20}\@\w{3,20}\.\w{3,7}$/gi;
+  const regEmail = /^[a-z][a-z0-9._]+@([a-z0-9-]+\.)+([a-z]{2,4})$/i;
   if(!regEmail.test(emailInput)){
     showMessage('Please insert a valid email', 'red', emailMsgElm);
     isValid = false;
@@ -62,7 +129,7 @@ function validatedEmail(){
 }
 
 // user name validation 8️⃣
-function validatedUserName(){
+function validateUserName(){
   const userNameInput = userNameField.value;
   const regExpUserName = /^[a-z]{3,10}\_[0-9]{2,5}$/i;
   if(!regExpUserName.test(userNameInput)){
@@ -74,7 +141,7 @@ function validatedUserName(){
 }
 
 // name validation 6️⃣
-function validatedName() {
+function validateName() {
   const nameInput = nameField.value;
   const regExpName = /^[a-z]{3,15}\s?[a-z\s]+$/i;
   if (!regExpName.test(nameInput)) {
@@ -89,11 +156,12 @@ function validatedName() {
 // validation input 5️⃣
 function validationInput(receivedData) {
   const { name, userName, email, mobileNumber, website, password, confirmPassword } = receivedData;
-  validatedName(name); //-> 6
-  validatedUserName(userName); //-> 8
-  validatedEmail(email); //-> 9
+  validateName(name); //-> 6
+  validateUserName(userName); //-> 8
+  validateEmail(email); //-> 9
   validateMobileNumber(mobileNumber); //-> 10
-  validatedWebsiteLink(website); //-> 11
+  validateWebsiteLink(website); //-> 11
+  validatePassword(password, confirmPassword); //-> 12
 
   return isValid;
 }
@@ -123,7 +191,10 @@ function receiveInputs() {
 function handelForm(e) {
   e.preventDefault();
   const receivedData = receiveInputs(); //-> 4
-  validationInput(receivedData); //-> 5
+  const isValid = validationInput(receivedData); //-> 5
+  if(!isValid)return
+  resetInput(); //-> 13
+  showDataUi(receivedData); //-> 14
 }
 
 // form addEventListener 2️⃣
