@@ -1,0 +1,15 @@
+.card{
+    background-color: #130f40;
+}
+.card:hover{
+    background-color: #f53b57;
+}
+#getData{
+    background-color: #f53b57;
+}
+#getData:hover{
+    background-color: #130f40;
+}
+.profile{
+    color: #1e272e;
+}

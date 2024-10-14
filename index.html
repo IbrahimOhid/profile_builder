@@ -1,86 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Create Profile</title>
     <!--bootstrap css cdn -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
     <!--css link-->
-    <link rel="stylesheet" href="./style.css">
-</head>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
 
-<body>
-    <div class="container card-0 justify-content-center py-5">
-        <div class="card-body px-sm-4 px-0">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 col-md-12">
-                    <div class="card shadow-lg card-1">
-                        <div class="card-body inner-card">
-                            <form class="row justify-content-center mb-3">
-                                <h1 class="text-center mb-4 text-primary">
-                                    <strong>Form Validation</strong>
-                                </h1>
-                                <h6 class="text-center text-decoration-underline text-danger">Using Regular Expression</h6>
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="form-group"><label for="name"></label><input type="text"
-                                            class="form-control" id="name" placeholder="Name"  > 
-                                            <small id="nameMsg">Ex: Mohammad Ibrahim</small>
-                                    </div>
-                                    <div class="form-group"><label for="username"></label><input type="text"
-                                            class="form-control" id="userName" placeholder="Username"  >
-                                        <small id="userMsg">Ex: ibrahim_33</small>
-                                    </div>
-                                    <div class="form-group"><label for="email"></label><input type="email"  
-                                            class="form-control" id="email" placeholder="Email"  =""><small id="emailMsg">Ex:
-                                            ibrahimohid01@gmail.com</small>
-                                    </div>
-                                    <div class="form-group"> <label for="mobile-number"></label> <input type="text"
-                                            class="form-control" id="mobileNumber" placeholder="Phone Number"
-                                             ><small id="mobileNumberMsg">Ex:
-                                            +8801744-442244 </small>
-                                    </div>
-                                    <div class="form-group"><label for="website-link"></label><input type="text"
-                                            class="form-control" id="websiteLink" placeholder="Website Link"
-                                             > <small id="websiteMsg">Ex: https://ibrahim.com, www.ibrahim.com, ibrahim.com</small>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="form-group"> <label for="password"></label> <input type="password"
-                                                    class="form-control" id="password" placeholder="Password"
-                                                     ><small id="passwordMsg">Ex: Letters-numbers-sign(More than 8 character)</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="form-group"> <label for="confirm-password"></label> <input type="password"
-                                                    class="form-control" id="confirmPassword"
-                                                    placeholder="Confirm Password"  >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3">
-                                        <input class="w-100 py-1 btn btn-lg btn-primary fw-semibold" type="submit"
-                                            value="Sign Up">
-                                    </div>
-                                </div>
-                            </form>
-                            <div id="showDataInUi"></div>
-                        </div>
-                    </div>
+  <body>
+    <div class="container ">
+        <div class="pt-5 mb-5 text-center">
+            <h1 class="text-decoration-underline profile">Profile Builder</h1>
+        </div>
+        <div class="pb-5">
+            <div class="row justify-content-center gap-3" id="showData">
+                <div class="col-md-3 text-center">
+                    <h3>Show User Data</h3>
                 </div>
             </div>
+            <br>
+            <div class="text-center">
+                <button id="getData" class="btn text-white py-2 fw-bolder px-5">Get Data</button>
+            </div>
         </div>
+
         
     </div>
-        <!--bootstrap js cdn-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
-            <!--js link-->
-            <script src="./script.js"></script>
-</body>
 
+   
+    <!--bootstrap js cdn-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <!--js link-->
+    <script src="./js/script.js"></script>
+    <!--json link-->
+    <script src="./json/user.json"></script>
+  </body>
 </html>
